@@ -335,7 +335,6 @@ void BankFrame::ClientInfoSaveTransfer() {
 
 // Méthode qui transfère de l'argent sur un autre compte
 void BankFrame::OnTransferAccount(wxCommandEvent& event) {
-	ClientInfoSave();
 	// On affiche le pop up pour entrer le numéro de client
 	wxTextEntryDialog dialog(this, "Entrez le numéro de client :", "Transfer d'argent");
 	if (dialog.ShowModal() == wxID_OK)
@@ -862,6 +861,14 @@ void BankFrame::Creation(wxCommandEvent& event)
 			accountName_.Add("Epargne");
 			accountType_.Add(0);
 			balance_.Add(0);
+
+			// Si le nombre de transaction est au max on supprime la première transaction
+
+	       
+			if (transactionList_.GetCount() == 9999) {
+				transactionList_.RemoveAt(0);
+				transactionListAccount_.RemoveAt(0);
+			}
 			
 			transactionList_.Add("Creation du compte");
 			transactionListAccount_.Add(0);
